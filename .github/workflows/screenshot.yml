@@ -30,6 +30,14 @@ jobs:
         with:
           url: https://vacuumlabs.com
           destination: ./homepage.png
+
+      - name: Screenshot Website
+        uses: swinton/screenshot-website@v1.x
+        with:
+          source: https://vacuumlabs.com
+          destination: homepage-${{ date +"%Y-%m-%dT%H:%M:%S" }}.png
+          full-page: true
+          width: 1920 
       
       - name: push
         run: |
