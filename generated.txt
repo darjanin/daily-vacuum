@@ -1,7 +1,0 @@
-LICENSE
-README.md
-generated.txt
-homepage-2021-01-19T17:52:46.png
-homepage-2021-01-19T18:00:10.png
-homepage-screenshot.jpeg
-homepage.png
