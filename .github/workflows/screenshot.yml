@@ -52,7 +52,7 @@ jobs:
       - name: push
         run: |
           ls > generated.txt
-          mv homepage-screenshot.jpeg > "./homepage-$(date +'%Y-%m-%dT%H:%M:%S').jpeg"
+          mv homepage-screenshot.jpeg "./homepage-$(date +'%Y-%m-%dT%H:%M:%S').jpeg"
           rm homepage-screenshot.jpeg
           git config user.name github-actions
           git config user.email github-actions@github.com
