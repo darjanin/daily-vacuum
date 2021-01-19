@@ -29,23 +29,16 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         
-#       - name: Homepage Scfeenshot
-#         uses: JonathanTreffler/full-website-screenshot-action@v1.0
-#         with:
-#           url: https://vacuumlabs.com
-#           destination: ./homepage.png
-
-      - name: Screenshot Website
-        uses: swinton/screenshot-website@v1.x
+      - name: Homepage Scfeenshot
+        uses: JonathanTreffler/full-website-screenshot-action@v1.0
         with:
-          source: https://vacuumlabs.com
-          destination: homepage-${{ steps.date.outputs.date }}.png
-          full-page: true
-          width: 1920 
+          url: https://vacuumlabs.com
+          destination: ./homepages.png
       
       - name: push
         run: |
           ls > generated.txt
+          mv homepages.png "homepage-$(date +'%Y-%m-%dT%H:%M:%S').png"
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
