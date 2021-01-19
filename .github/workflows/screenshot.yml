@@ -29,11 +29,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         
-      - name: Homepage Scfeenshot
-        uses: JonathanTreffler/full-website-screenshot-action@v1.0
-        with:
-          url: https://vacuumlabs.com
-          destination: ./homepage.png
+#       - name: Homepage Scfeenshot
+#         uses: JonathanTreffler/full-website-screenshot-action@v1.0
+#         with:
+#           url: https://vacuumlabs.com
+#           destination: ./homepage.png
 
       - name: Screenshot Website
         uses: swinton/screenshot-website@v1.x
