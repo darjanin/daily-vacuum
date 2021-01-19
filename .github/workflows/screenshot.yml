@@ -22,23 +22,29 @@ jobs:
         with:
           node-version: '14'
   
-      - name: Get current date
-        id: date
-        run: echo "name=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV  
+#       - name: Create filename name
+#         id: filename
+#         run: echo "name=homepage-$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV  
       
       - name: checkout
         uses: actions/checkout@v2
         
-      - name: Homepage Scfeenshot
-        uses: JonathanTreffler/full-website-screenshot-action@v1.0
-        with:
-          url: https://vacuumlabs.com
-          destination: ./homepages.png
+      - name: Install capture-website-cli
+        shell: bash
+        run: |
+          echo "Installing dependencies ..."
+          npm install --global capture-website-cli 1> /dev/null
+          echo "Dependencies installed successfully"
+
+      - name: Screenshot Website
+        shell: bash
+        run: |
+          capture-website "https://vacuumlabs.com" --output "./homepage-$(date +'%Y-%m-%dT%H:%M:%S').png" --full-page --scale-factor 1
+          echo "Screenshot done"
       
       - name: push
         run: |
           ls > generated.txt
-          mv homepages.png "homepage-$(date +'%Y-%m-%dT%H:%M:%S').png"
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
