@@ -36,24 +36,24 @@ jobs:
           npm install --global capture-website-cli 1> /dev/null
           echo "capture-website-cli installed successfully"
 
-      - name: Install imagemin
-        shell: bash
-        run: |
-          echo "Installing imagemin-cli"
-          npm install --global imagemin-cli
-          echo "imagemin-cli installed successfully"
+#       - name: Install imagemin
+#         shell: bash
+#         run: |
+#           echo "Installing imagemin-cli"
+#           npm install --global imagemin-cli
+#           echo "imagemin-cli installed successfully"
 
       - name: Screenshot Website
         shell: bash
         run: |
-          capture-website "https://vacuumlabs.com" --output "./homepage-screenshot.png" --full-page --scale-factor 1
+          capture-website "https://vacuumlabs.com" --output "./homepage-screenshot.jpeg" --full-page --scale-factor 1 --type jpeg
           echo "Screenshot done"
       
       - name: push
         run: |
           ls > generated.txt
-          imagemin homepage-screenshot.png > "./homepage-$(date +'%Y-%m-%dT%H:%M:%S').png"
-          rm homepage-screenshot.png
+          mv homepage-screenshot.jpeg > "./homepage-$(date +'%Y-%m-%dT%H:%M:%S').jpeg"
+          rm homepage-screenshot.jpeg
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
