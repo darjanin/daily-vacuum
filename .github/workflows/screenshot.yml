@@ -9,6 +9,8 @@ on:
     # branches: [ main ]
   # pull_request:
     # branches: [ main ]
+  schedule:
+    - cron: '0 20 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -21,10 +23,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '14'
-  
-#       - name: Create filename name
-#         id: filename
-#         run: echo "name=homepage-$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV  
       
       - name: checkout
         uses: actions/checkout@v2
@@ -36,23 +34,18 @@ jobs:
           npm install --global capture-website-cli 1> /dev/null
           echo "capture-website-cli installed successfully"
 
-#       - name: Install imagemin
-#         shell: bash
-#         run: |
-#           echo "Installing imagemin-cli"
-#           npm install --global imagemin-cli
-#           echo "imagemin-cli installed successfully"
-
       - name: Screenshot Website
         shell: bash
         run: |
           capture-website "https://vacuumlabs.com" --output "./homepage-screenshot.jpeg" --full-page --scale-factor 1 --type jpeg
+          capture-website "https://vacuumlabs.com/contact" --output "./contact-screenshot.jpeg" --full-page --scale-factor 1 --type jpeg
           echo "Screenshot done"
       
       - name: push
         run: |
           ls > generated.txt
           mv homepage-screenshot.jpeg "./homepage-$(date +'%Y-%m-%dT%H:%M:%S').jpeg"
+          mv contact-screenshot.jpeg "./contact-$(date +'%Y-%m-%dT%H:%M:%S').jpeg"
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
