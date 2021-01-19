@@ -4,11 +4,6 @@ name: Screenshot
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  # push:
-    # branches: [ main ]
-  # pull_request:
-    # branches: [ main ]
   schedule:
     - cron: '0 20 * * *'
 
@@ -44,8 +39,8 @@ jobs:
       - name: push
         run: |
           ls > generated.txt
-          mv homepage-screenshot.jpeg "./homepage-$(date +'%Y-%m-%dT%H:%M:%S').jpeg"
-          mv contact-screenshot.jpeg "./contact-$(date +'%Y-%m-%dT%H:%M:%S').jpeg"
+          mv homepage-screenshot.jpeg "./homepage/homepage-$(date +'%Y-%m-%dT%H:%M:%S').jpeg"
+          mv contact-screenshot.jpeg "./contact/contact-$(date +'%Y-%m-%dT%H:%M:%S').jpeg"
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
