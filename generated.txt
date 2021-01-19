@@ -2,4 +2,5 @@ LICENSE
 README.md
 generated.txt
 homepage-2021-01-19T17:52:46.png
+homepage-screenshot.png
 homepage.png
