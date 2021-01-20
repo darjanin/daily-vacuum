@@ -2,13 +2,13 @@
 
 name: Screenshot
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   schedule:
-    - cron: '16 20 * * *'
+    - cron: '0 11 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
-  #workflow_dispatch:
+  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -18,10 +18,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '14'
-      
+
       - name: checkout
         uses: actions/checkout@v2
-        
+
       - name: Install capture-website-cli
         shell: bash
         run: |
@@ -35,15 +35,15 @@ jobs:
           capture-website "https://vacuumlabs.com" --output "./homepage-screenshot.jpeg" --full-page --scale-factor 1 --type jpeg
           capture-website "https://vacuumlabs.com/contact" --output "./contact-screenshot.jpeg" --full-page --scale-factor 1 --type jpeg
           echo "Screenshot done"
-      
+
       - name: push
         run: |
-          ls > generated.txt
-          mv homepage-screenshot.jpeg "./homepage/homepage-$(date +'%Y-%m-%dT%H:%M:%S').jpeg"
-          mv contact-screenshot.jpeg "./contact/contact-$(date +'%Y-%m-%dT%H:%M:%S').jpeg"
+          timestamp=$(date +'%Y-%m-%dT%H:%M:%S')
+          mv homepage-screenshot.jpeg "./homepage/homepage-$timestamp.jpeg"
+          mv contact-screenshot.jpeg "./contact/contact-$timestamp.jpeg"
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
           git commit -m "generated"
           git push
-        
+
