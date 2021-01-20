@@ -32,15 +32,15 @@ jobs:
       - name: Screenshot Website
         shell: bash
         run: |
-          capture-website "https://vacuumlabs.com" --output "./homepage-screenshot.jpeg" --full-page --scale-factor 1 --type jpeg
-          capture-website "https://vacuumlabs.com/contact" --output "./contact-screenshot.jpeg" --full-page --scale-factor 1 --type jpeg
+          capture-website "https://vacuumlabs.com" --output "./homepage-screenshot.png" --full-page --scale-factor 1 --type png
+          capture-website "https://vacuumlabs.com/contact" --output "./contact-screenshot.png" --full-page --scale-factor 1 --type png
           echo "Screenshot done"
 
       - name: push
         run: |
           timestamp=$(date +'%Y-%m-%dT%H:%M:%S')
-          mv homepage-screenshot.jpeg "./homepage/homepage-$timestamp.jpeg"
-          mv contact-screenshot.jpeg "./contact/contact-$timestamp.jpeg"
+          mv homepage-screenshot.png "./homepage/homepage-$timestamp.png"
+          mv contact-screenshot.png "./contact/contact-$timestamp.png"
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
