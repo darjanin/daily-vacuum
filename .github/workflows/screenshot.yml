@@ -42,7 +42,7 @@ jobs:
           mv homepage-screenshot.jpeg "./homepage/homepage-$timestamp.jpeg"
           mv contact-screenshot.jpeg "./contact/contact-$timestamp.jpeg"
           git config user.name MikiVlckova
-          git config user.email miki@vacuumlabs.com
+          git config user.email miki.vlckova@vacuumlabs.com
           git add .
           git commit -m "generated"
           git push
